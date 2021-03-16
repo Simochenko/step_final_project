@@ -1,4 +1,5 @@
 import math
+import re
 
 from selenium.common.exceptions import NoAlertPresentException
 from selenium.common.exceptions import NoSuchElementException
@@ -39,3 +40,16 @@ class BasePage(object):
     def add_to_basket(self):
         button = self.browser.find_element(*ProductPageLocators.ADD_BTN)
         button.click()
+
+    def get_text(self, how, what):
+        try:
+            return self.browser.find_element(how, what).text
+        except NoSuchElementException:
+            return None
+
+    def get_num(self, how, what):
+        try:
+            numtxt = self.browser.find_element(how, what).text.replace(',', '.')
+            return float(re.findall(r'\d+.\d+', numtxt)[0])
+        except NoSuchElementException:
+            return None

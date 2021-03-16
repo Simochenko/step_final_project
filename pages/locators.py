@@ -15,7 +15,7 @@ class LoginPageLocators(object):
 
 
 class ProductPageLocators(object):
-    ADD_BTN = (By.CSS_SELECTOR, "#add_to_basket_form > button")
+    ADD_BTN = (By.CSS_SELECTOR, "button.btn-add-to-basket")
     PRODUCT_NAME = (By.CSS_SELECTOR, ".product_main h1")
     ADD_PRODUCT_NAME = (By.XPATH, "//*[@id='messages']/div[1]/div/strong")
     PRODUCT_PRICE = (By.CSS_SELECTOR, ".product_main p")
