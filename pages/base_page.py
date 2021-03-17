@@ -1,8 +1,10 @@
 import math
 import re
+from selenium.webdriver.support import expected_conditions as EC
 
-from selenium.common.exceptions import NoAlertPresentException
+from selenium.common.exceptions import NoAlertPresentException, TimeoutException
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support.wait import WebDriverWait
 
 from pages.locators import ProductPageLocators
 
@@ -53,3 +55,11 @@ class BasePage(object):
             return float(re.findall(r'\d+.\d+', numtxt)[0])
         except NoSuchElementException:
             return None
+
+    def is_not_element_present(self, how, what, timeout=4):
+        try:
+            WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
+        except TimeoutException:
+            return True
+
+        return False
