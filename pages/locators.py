@@ -63,7 +63,18 @@ class ProductPageLocators():
     # SUCCESS_MESSAGE = (By.CSS_SELECTOR, '.alert-success:nth-child(1)')
     SUCCESS_MESSAGE = (By.CSS_SELECTOR, '.alert-success')
 
+
 class BasketPageLocators():
     BASKET_CONTENT = (By.CSS_SELECTOR, '#content_inner')
     BASKET_ITEMS = (By.CSS_SELECTOR, '#basket-items')
     EMPTY_BASKET_MESSAGE = 'Your basket is empty.'
+
+
+class LoginPageLocators():
+    LOGIN_FORM = (By.CSS_SELECTOR, '#login_form')
+    REGISTER_FORM = (By.CSS_SELECTOR, '#register_form')
+    LOGIN_URL_MARKER = 'login'
+    REG_EMAIL = (By.ID, 'id_registration-email')
+    REG_PWD1 = (By.ID, 'id_registration-password1')
+    REG_PWD2 = (By.ID, 'id_registration-password2')
+    REG_SUBMIT = (By.CSS_SELECTOR, "[name='registration_submit']")

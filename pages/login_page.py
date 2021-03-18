@@ -1,3 +1,7 @@
+import logging
+
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from pages.locators import LoginPageLocators
 from .base_page import BasePage
 
@@ -17,3 +21,20 @@ class LoginPage(BasePage):
 
     def should_be_register_form(self):
         assert self.is_element_present(*LoginPageLocators.REGISTER_FORM), 'Register form is not presented'
+
+    def register_new_user(self, email, password):
+        logging.debug(f"Registering `{email}` with `{password}`")
+
+        WebDriverWait(self.browser, 15).until(EC.element_to_be_clickable(LoginPageLocators.REG_EMAIL))
+
+        email_input = self.browser.find_element(*LoginPageLocators.REG_EMAIL)
+        email_input.send_keys(email)
+
+        pwd1_input = self.browser.find_element(*LoginPageLocators.REG_PWD1)
+        pwd1_input.send_keys(password)
+
+        pwd2_input = self.browser.find_element(*LoginPageLocators.REG_PWD2)
+        pwd2_input.send_keys(password)
+
+        register_button = self.browser.find_element(*LoginPageLocators.REG_SUBMIT)
+        register_button.click()

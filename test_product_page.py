@@ -1,4 +1,5 @@
-from time import sleep
+import random
+import time
 
 import pytest
 
@@ -82,3 +83,24 @@ def test_guest_can_go_to_login_page_from_product_page(browser):
     login_page = LoginPage(browser, browser.current_url)
     login_page.should_be_login_page()
 
+
+class TestUserAddToBasketFromProductPage():
+
+    @pytest.fixture(scope="function", autouse=True)
+    def setup(self, browser):
+        login_url = 'http://selenium1py.pythonanywhere.com/accounts/login/'
+
+        rand_number = random.randint(1000000000, 10000000000)
+        reg_email = f"test_user_{str(time.time())}_{rand_number}@stepik.email"
+        reg_pwd = f"pw_{rand_number}"
+
+        page = LoginPage(browser, login_url)
+        page.open()
+        page.register_new_user(reg_email, reg_pwd)
+        page.should_be_authorized_user()
+
+    def test_user_cant_see_success_message(self, browser):
+        product_url = 'http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear'
+        page = ProductPage(browser, product_url)
+        page.open()
+        page.should_not_be_success_message()
