@@ -2,10 +2,9 @@
 #
 
 import logging
-import time
 
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 from .base_page import BasePage
 from .locators import LoginPageLocators

@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 #
 
-import logging
-
 from .base_page import BasePage
 from .locators import BasketPageLocators
 
