@@ -11,6 +11,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 from .locators import BasePageLocators
 
+
 class BasePage():
     BROWSE_STORE_NAMES = {'en-gb': 'Browse store',
                           'es': 'Explorar la tienda'}

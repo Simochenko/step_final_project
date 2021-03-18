@@ -6,9 +6,9 @@ import time
 
 import pytest
 
-from pages.basket_page import BasketPage
-from pages.login_page import LoginPage
-from pages.product_page import ProductPage
+from .pages.basket_page import BasketPage
+from .pages.login_page import LoginPage
+from .pages.product_page import ProductPage
 
 
 def test_guest_cant_see_success_message(browser):
@@ -106,7 +106,7 @@ class TestUserAddToBasketFromProductPage():
         login_url = 'http://selenium1py.pythonanywhere.com/accounts/login/'
 
         rand_number = random.randint(1000000000, 10000000000)
-        reg_email = f"test_user_{str(time.time())}_{rand_number}@xtest.email"
+        reg_email = f"test_user_{str(time.time())}_{rand_number}@stepik.email"
         reg_pwd = f"pw_{rand_number}"
 
         page = LoginPage(browser, login_url)

@@ -3,9 +3,9 @@
 
 import pytest
 
-from pages.basket_page import BasketPage
-from pages.login_page import LoginPage
-from pages.main_page import MainPage
+from .pages.basket_page import BasketPage
+from .pages.login_page import LoginPage
+from .pages.main_page import MainPage
 
 
 @pytest.mark.login_guest
@@ -65,6 +65,6 @@ def test_guest_can_change_language(browser):
     page.open()
 
     current_browse_store_name = page.get_browse_store_name()
-    lang = 'es'
+    lang = 'en'
     page.change_language(lang)
     page.language_should_be(lang)
