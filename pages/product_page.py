@@ -1,31 +1,47 @@
-from pages.base_page import BasePage
-from pages.locators import ProductPageLocators
+# -*- coding: utf-8 -*-
+#
+
+import logging
+
+from .base_page import BasePage
+from .locators import ProductPageLocators
 
 
 class ProductPage(BasePage):
-    def should_be_promo_url(self, promotxt):
-        # проверка на наличие promotxt в url адреса
-        parIdx = self.url.find("?")
-        assert parIdx > 0 and self.url.find(promotxt) > parIdx, "URL is not corrected"
+    def add_to_basket(self):
+        button = self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET_BUTTON)
+        button.click()
 
-    def should_be_add_to_basket(self):
-        # проверка, что товар добавляется в корзину
-        assert self.click_element(*ProductPageLocators.ADD_BTN), "Product don't add to basket"
+    def product_price(self):
+        price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE).text
+        return price
 
-    def should_be_add_correct_product(self):
-        # проверка, что нужный товар добавлен в корзину
-        assert self.get_text(*ProductPageLocators.PRODUCT_NAME).strip() == self.get_text(
-            *ProductPageLocators.ADD_PRODUCT_NAME).strip(), "Product is not corrected"
+    def product_name(self):
+        name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME).text
+        return name
 
-    def should_be_correct_sum(self):
-        # проверка, что сумма пересчиталась корректно
-        assert self.get_num(*ProductPageLocators.SUM_BASKET) == self.get_num(
-            *ProductPageLocators.PRODUCT_PRICE), "Sum is not corrected"
+    def basket_total_should_equal_to(self, expected_sum):
+        total = self.browser.find_element(*ProductPageLocators.BASKET_SUM)
+        total_text = total.text.split()
+        logging.debug(f"total.text: {total.text}")
+        logging.debug(f"total_text_splitted: {total_text}")
+        total_sum = total_text[2]
+        assert total_sum == expected_sum, f"{expected_sum} expected as basket total, but {total_sum} in fact"
+
+    def some_add_notification_should_include(self, expected_name):
+        item_added_message_found = False
+        all_notifications = self.browser.find_elements(*ProductPageLocators.NOTIFICATION)
+        expected_notification = f"{expected_name} {ProductPageLocators.PRODUCT_ADDED_MESSAGE}"
+        for notification in all_notifications:
+            logging.debug(f"notification: {notification.text}")
+            if notification.text == expected_notification:
+                item_added_message_found = True
+        assert item_added_message_found, f"Some of notifications should be equal to `{expected_notification}`, but none found"
 
     def should_not_be_success_message(self):
-        assert self.is_not_element_present(
-            *ProductPageLocators.SUCCESS_MESSAGE), "Success message is presented, but should not be"
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
 
-    def should_not_be_success_message2(self):
-        assert self.is_disappeared(
-            *ProductPageLocators.SUCCESS_MESSAGE), "Success message is disappeared, but should not be"
+    def success_message_is_disappeared(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"

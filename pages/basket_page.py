@@ -1,7 +1,10 @@
+# -*- coding: utf-8 -*-
+#
+
 import logging
 
-from pages.base_page import BasePage
-from pages.locators import BasketPageLocators
+from .base_page import BasePage
+from .locators import BasketPageLocators
 
 
 class BasketPage(BasePage):

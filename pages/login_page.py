@@ -1,9 +1,14 @@
+# -*- coding: utf-8 -*-
+#
+
 import logging
+import time
 
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from pages.locators import LoginPageLocators
+
 from .base_page import BasePage
+from .locators import LoginPageLocators
 
 
 class LoginPage(BasePage):
