@@ -24,11 +24,17 @@ class ProductPageLocators():
 
 
 class BasePageLocators():
-    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
-    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
-    CART_LINK = (By.CSS_SELECTOR, ".btn-default[href*='basket']")
-    CART_LINK_INVALID = (By.CSS_SELECTOR, "#basket_unlink")
-    USER_ICON = (By.CSS_SELECTOR, ".icon-user")
+    LOGIN_LINK = (By.CSS_SELECTOR, '#login_link')
+    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, '#login_link_inc')
+    VIEW_BASKET_BUTTON = (By.CSS_SELECTOR, '.basket-mini .btn-group a.btn-default')
+    USER_ICON = (By.CSS_SELECTOR, '.icon-user')
+    BROWSE_STORE = (By.CSS_SELECTOR, '.dropdown.active.open .dropdown-toggle')
+    ALL_PRODUCTS_MENU_ITEM = (By.CSS_SELECTOR, '.dropdown.active.open .dropdown-menu li:nth-child(1) > a')
+    PRODUCT_CARDS = (By.CSS_SELECTOR, '.product_pod')
+    SEARCH_FIELD = (By.CSS_SELECTOR, "[type='search']")
+    SEARCH_BUTTON = (By.CSS_SELECTOR, '.navbar-right .btn-default')
+    LANG_DROPDOWN = (By.CSS_SELECTOR, "[name='language']")
+    CHANGE_LANG_BUTTON = (By.CSS_SELECTOR, '#language_selector .btn-default')
 
 
 class CartPageLocators():
@@ -56,3 +62,8 @@ class ProductPageLocators():
     PRODUCT_ADDED_MESSAGE = 'has been added to your basket.'
     # SUCCESS_MESSAGE = (By.CSS_SELECTOR, '.alert-success:nth-child(1)')
     SUCCESS_MESSAGE = (By.CSS_SELECTOR, '.alert-success')
+
+class BasketPageLocators():
+    BASKET_CONTENT = (By.CSS_SELECTOR, '#content_inner')
+    BASKET_ITEMS = (By.CSS_SELECTOR, '#basket-items')
+    EMPTY_BASKET_MESSAGE = 'Your basket is empty.'
